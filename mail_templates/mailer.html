@@ -1,0 +1,42 @@
+<html>
+    <body style='padding:18px'>
+        <div style='margin:0 auto;max-width:600px'>
+            <h3 style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
+                Hi {{ recipient_email }},
+            </h3>
+            <p style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
+                {{ sender_name }} has shared a file with you, please find the download link below.
+                <br>
+            </p>
+            <table style='width:100%;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;background:linear-gradient(to right, #f2f2f2, #e6e6e6);'>
+
+                <tr>
+                    <th colspan="2" style='border:1px solid #ddd;padding-top:12px; padding-bottom:12px;text-align:center;background:linear-gradient(to right, #1aabff, #0098f0cc);color:white;'>File Details</th>
+                </tr>
+                <tr>
+                    <td style="border:1px solid #ddd; padding:8px; text-align: right;"><b>File Name</b></td>
+                    <td style="border:1px solid #ddd; padding:8px; text-align: left;">{{ file_basename }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border:1px solid #ddd; padding:8px; text-align: center;">
+                        <a href="{{ download_link }}" style="background-color: #1aabff; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Download</a>
+                    </td>
+                </tr>
+            </table>
+            <p style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
+                <br>
+                Kind Regards,
+                <br>
+                {{ sender_name }}
+            </p>
+            <br>
+            <small class="text-muted" style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
+                This email was sent automatically.
+                <br>
+                The download link above will expire 7 days after receipt.
+                <br>
+                Email {{ sender_address }} with any queries.
+            </small>
+        </div>
+    </body>
+</html>

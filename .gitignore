@@ -3,6 +3,6 @@ __pycache__/
 
 settings.py
 
-*.html
+rendered_email.html
 
 google.json
