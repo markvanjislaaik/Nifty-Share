@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # opening the resulting ./rendered_email.html file in your browser
     # or open with VS Code Live Server extension.
 
-    recipient = "markvanjislaaik@gmail.com"
+    recipient = "recipient@example.com"
     mail_context = {
         "sender_name": "Mark v.H",
         "file_basename": "filename.mp4",
