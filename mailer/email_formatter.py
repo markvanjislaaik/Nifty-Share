@@ -18,10 +18,10 @@ if __name__ == '__main__':
 
     recipient = "markvanjislaaik@gmail.com"
     mail_context = {
-        "sender_name": "Mark van Heeswijk",
-        "file_basename": "SSBlitz_20230114_SAST.zip",
+        "sender_name": "Mark v.H",
+        "file_basename": "filename.mp4",
         "sender_address": 'mark@example.com',
-        "download_link": "https://example.com/download/SSRugby_20230114_SAST.zip",
+        "download_link": "https://example.com/download/filename.mp4",
         "recipent_email": recipient
     }
     
