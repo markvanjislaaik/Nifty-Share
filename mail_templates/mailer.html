@@ -1,42 +1,277 @@
-<html>
-    <body style='padding:18px'>
-        <div style='margin:0 auto;max-width:600px'>
-            <h3 style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
-                Hi {{ recipient_email }},
-            </h3>
-            <p style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
-                {{ sender_name }} has shared a file with you, please find the download link below.
-                <br>
-            </p>
-            <table style='width:100%;font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;background:linear-gradient(to right, #f2f2f2, #e6e6e6);'>
+<!DOCTYPE html>
+<html lang="en">
 
+<body>
+    <div style="outline:none;margin:0;padding:0" bgcolor="#f4f4f4">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0"
+            style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:auto!important;margin:10;"
+            bgcolor="#f4f4f4">
+            <tbody>
                 <tr>
-                    <th colspan="2" style='border:1px solid #ddd;padding-top:12px; padding-bottom:12px;text-align:center;background:linear-gradient(to right, #1aabff, #0098f0cc);color:white;'>File Details</th>
-                </tr>
-                <tr>
-                    <td style="border:1px solid #ddd; padding:8px; text-align: right;"><b>File Name</b></td>
-                    <td style="border:1px solid #ddd; padding:8px; text-align: left;">{{ file_basename }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="border:1px solid #ddd; padding:8px; text-align: center;">
-                        <a href="{{ download_link }}" style="background-color: #1aabff; border: none; color: white; padding: 12px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">Download</a>
+                    <td style="outline:none;width:100%;margin:0;padding:0" align="left" valign="top">
+                        <center>
+                            <table width="600" align="center" cellspacing="0" cellpadding="0" border="0"
+                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:600px;min-width:600px;margin:0 auto;padding:0">
+                                <tbody>
+                                    <tr>
+                                        <td width="600"
+                                            style="outline:none;width:600px;min-width:600px;margin:0;padding:0"
+                                            align="left" valign="top">
+                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;display:none;font-size:0;max-height:0;width:0;margin:0;padding:0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="outline:none;width:0;display:none;font-size:0;max-height:0;margin:0;padding:0"
+                                                            align="left" valign="top">
+                                                            This <span class="il">transfer</span> expires on 2023-06-02
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="outline:none;width:100%;margin:0;padding:55px 0 0"
+                                                            align="left" valign="top">
+                                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                                <tbody>
+                                                                    <tr>
+
+                                                                        <td style="outline:none;width:100%;font-size:10px;background:no-repeat center/cover;margin:0;padding:0"
+                                                                            align="left" bgcolor="#FC4C02" valign="top">
+                                                                            <center>
+                                                                                <table align="center" cellspacing="0"
+                                                                                    cellpadding="0" border="0"
+                                                                                    style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:auto;margin:0 auto;padding:0">
+
+                                                                                    <tbody>
+
+                                                                                        <tr>
+                                                                                            <td height="11px"
+                                                                                                style="height:11px;outline:none;width:100%;margin:0;padding:0"
+                                                                                                align="left"
+                                                                                                valign="top"></td>
+                                                                                        </tr>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </center>
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0"
+                                                bgcolor="#ffffff">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="outline:none;width:100%;margin:0;padding:0"
+                                                            align="left" valign="top">
+                                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="outline:none;width:100%;margin:0;padding:0"
+                                                                            align="left" valign="top">
+                                                                            <table cellspacing="0" cellpadding="0"
+                                                                                border="0"
+                                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;color:#17181a;font-family:'Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:26px;font-style:normal;font-weight:normal;line-height:30px;word-spacing:0;margin:0;padding:60px 80px 0"
+                                                                                            align="center" valign="top">
+                                                                                            <a href="mailto:{{ sender_address }}"
+                                                                                                style="color:#17181a;font-weight:normal;text-decoration:none"
+                                                                                                target="_blank"><span
+                                                                                                    style="color:#FC4C02;font-weight:normal;text-decoration:none">{{ sender_name }}</span></a>
+                                                                                            <br>
+                                                                                            <span
+                                                                                                style="display:inline-flex">
+                                                                                                has shared
+                                                                                                {{ file_basename }}
+                                                                                                with you
+                                                                                            </span>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;color:#6a6d70;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:23px;word-spacing:0;margin:0;padding:20px 80px 0"
+                                                                                            align="center" valign="top">
+                                                                                            {{ file_size_mb }} MB in total
+                                                                                            ・ Expires on {{ expiry_date }}
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;margin:0;padding:40px 160px"
+                                                                                            align="left" valign="top">
+                                                                                            <table cellspacing="0"
+                                                                                                cellpadding="0"
+                                                                                                border="0"
+                                                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td style="outline:none;width:100%;margin:0;padding:0"
+                                                                                                            align="left"
+                                                                                                            valign="top">
+                                                                                                            <a href="{{ download_link }}" download
+                                                                                                                style="background-color:#FC4C02;color:#ffffff;display:block;font-family:'Fakt Pro Medium','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:14px;font-style:normal;text-align:center;text-decoration:none;word-spacing:0;border-radius:25px;padding:15px 20px">
+                                                                                                                <span>
+                                                                                                                    Get
+                                                                                                                    your
+                                                                                                                    files
+                                                                                                                </span>
+                                                                                                            </a>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;margin:0;padding:40px 80px 0"
+                                                                                            align="left" valign="top">
+                                                                                            <table cellspacing="0"
+                                                                                                cellpadding="0"
+                                                                                                border="0"
+                                                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td style="outline:none;width:100%;border-bottom-width:2px;border-bottom-color:#f4f4f4;border-bottom-style:solid;font-size:1px;line-height:0;margin:0;padding:0"
+                                                                                                            align="left"
+                                                                                                            valign="top">
+                                                                                                            &nbsp;</td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;color:#797c7f;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:24px;word-spacing:0;word-break:break-all;margin:0;padding:50px 80px 0"
+                                                                                            align="left" valign="top">
+                                                                                            <span
+                                                                                                style="color:#17181a;font-family:'Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:18px;font-weight:500">
+                                                                                                Download link
+                                                                                            </span>
+                                                                                            <br>
+                                                                                            <a href="{{ download_link }}" download
+                                                                                                style="color:#17181a;font-family:'Fakt Pro Medium','Segoe UI','SanFrancisco Display',Arial,sans-serif;text-decoration:underline;font-weight:normal;word-wrap:break-word"><span style="color:#FC4C02;font-weight:normal;text-decoration:underline;word-wrap:break-word">{{ download_link }}</span>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;color:#797c7f;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:24px;word-spacing:0;margin:0;padding:0 80px 50px"
+                                                                                            align="left" valign="top">
+                                                                                            <div
+                                                                                                style="color:#17181a;font-family:'Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:18px;font-weight:500">
+                                                                                            </div>
+                                                                                            <div
+                                                                                                style="border-bottom-width:1px;border-bottom-color:#f4f4f4;border-bottom-style:none;padding:9px 0 7px">
+                                                                                                <div
+                                                                                                    style="color:#17181a;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:16px;word-spacing:0">
+                                                                                                    {{ file_basename }}
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    style="color:#6a6d70;font-size:12px;line-height:16px">
+                                                                                                    {{ file_size_mb }} MB
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="outline:none;width:100%;margin:0;padding:2px 0 0"
+                                                            align="left" valign="top">
+
+                                                            <table cellspacing="0" cellpadding="0" border="0"
+                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0"
+                                                                bgcolor="#ffffff">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="outline:none;width:100%;margin:0;padding:0 20px"
+                                                                            align="left" valign="top">
+
+                                                                            <table cellspacing="0" cellpadding="0"
+                                                                                border="0"
+                                                                                style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td style="outline:none;width:100%;color:#797c7f;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:24px;word-spacing:0;margin:0;padding:13px 0"
+                                                                                            align="center" valign="top">
+                                                                                            <p
+                                                                                                style="outline:none;margin:0;padding:0">
+                                                                                                Thanks for using Nifty
+                                                                                                Share!
+                                                                                            </p>
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+
+                                                                            
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </center>
+                        <table cellspacing="0" cellpadding="0" border="0" style="outline:none;border-collapse:collapse;border-spacing:0;table-layout:fixed;width:100%;margin:0;padding:0;background-color: #f4f4f4;">
+                            <tbody>
+                                <tr>
+                                    <td style="outline:none;width:100%;color:#797c7f;font-family:'Fakt Pro','Segoe UI','SanFrancisco Display',Arial,sans-serif;font-size:12px;font-style:normal;font-weight:normal;line-height:24px;word-spacing:0;margin:0;padding:13px 0"
+                                        align="center" valign="top">
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
-            </table>
-            <p style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
-                <br>
-                Kind Regards,
-                <br>
-                {{ sender_name }}
-            </p>
-            <br>
-            <small class="text-muted" style='font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;'>
-                This email was sent automatically.
-                <br>
-                The download link above will expire 7 days after receipt.
-                <br>
-                Email {{ sender_address }} with any queries.
-            </small>
-        </div>
-    </body>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+
 </html>

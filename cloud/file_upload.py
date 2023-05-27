@@ -1,6 +1,7 @@
 import threading
 import sys
 import os
+import datetime
 import boto3
 from boto3.s3.transfer import TransferConfig
 import logging
@@ -144,7 +145,15 @@ class GoogleCloudFileUploader(FileUploader):
             storage_client = storage.Client.from_service_account_json(self.credentials_path)
             bucket = storage_client.get_bucket(self.bucket_name)
             blob = bucket.blob(key_path)
-            return blob.public_url
+
+            download_url = blob.generate_signed_url(
+                version="v4",
+                expiration=datetime.timedelta(days=7),
+                method="GET",
+                response_disposition="attachment"
+            )
+
+            return download_url
         except Exception as e:
             logger.critical(f"Get Shareable Link Error: {e}")
             return None

@@ -10,6 +10,8 @@ from settings import MailerConfig
 import logging
 import sys
 
+from datetime import datetime, timedelta
+
 log_format = ('[%(asctime)s] - %(levelname)s %(name)s %(funcName)s %(message)s')
 logging.basicConfig(
     level=logging.INFO,
@@ -39,13 +41,18 @@ if __name__ == '__main__':
     link = uploader.get_shareable_link(f"testfolder/{os.path.basename(args.file_path)}")
     logger.debug(f"Shareable link: {link}")
 
+    expiry_date = datetime.now() + timedelta(days=7)
+    expiry_date = expiry_date.strftime("%A, %B %d, %Y")
+
     # Email formatting
     mail_context = {
         "sender_name": MailerConfig.MAIL_HOST_SENDER_NAME,
         "file_basename": os.path.basename(args.file_path),
         "sender_address": MailerConfig.MAIL_HOST_SENDER_ADDRESS,
         "download_link": link,
-        "recipent_email": args.recipient
+        "recipent_email": args.recipient,
+        "expiry_date": expiry_date,
+        "file_size_mb": round(os.path.getsize(args.file_path) / 1024 / 1024, 2)
     }
 
     template_renderer = EmailTemplateRenderer(template_dir='mail_templates')
