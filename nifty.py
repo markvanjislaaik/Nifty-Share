@@ -27,11 +27,11 @@ logger = logging.getLogger(__name__)
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Share a file via email.')
-    parser.add_argument('file_path', type=str, help='Path to the file')
-    parser.add_argument('-to', '--recipient', type=str, help='Email address of the recipient')
+    parser = argparse.ArgumentParser(description='Share a link to a file via email.')
+    parser.add_argument('file_path', type=str, help='path/to/your/file')
+    parser.add_argument('recipient', type=str, help='Email address of the recipient')
     parser.add_argument('-p', '--provider', type=str, default='AWS', help='Cloud provider (default: AWS)')
-    parser.add_argument('--template', type=str, default='mailer.html', help='Email template filename (default: mailer.html)')
+    parser.add_argument('-t', '--template', type=str, default='mailer.html', help='Email template filename (default: mailer.html)')
     args = parser.parse_args()
 
     # File upload and get shareable link
