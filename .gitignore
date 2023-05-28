@@ -6,3 +6,5 @@ settings.py
 rendered_email.html
 
 google.json
+
+*.zip
