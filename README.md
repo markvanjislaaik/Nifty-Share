@@ -1,22 +1,48 @@
 # Nifty Share
 
-You can use Nifty Share to send small or large files with your own cloud provider.
+You can use Nifty Share to send small or large files with your own cloud provider from the command-line.
 
 
 ## Usage
 
-```bash
-python nifty.py "path/to/file" -to recipient@example.com --provider AWS --template mailer.html
+```ps1
+usage: nifty.py [-h] [-p PROVIDER] [-t TEMPLATE] file_path recipient  
 
-OR
+Share a link to a file via email.
 
-python nifty.py "path/to/file" -to recipient@example.com --provider Google
+positional arguments:
+  file_path             path/to/your/file
+  recipient             Email address of the recipient
+
+options:
+  -h, --help            show this help message and exit
+  -p PROVIDER, --provider PROVIDER
+                        Cloud provider (default: AWS)
+  -t TEMPLATE, --template TEMPLATE
+                        Email template filename (default: mailer.html)
 ```
 
-Using your own credentials, create a `settings.py` file (in the same directory as `nifty.py`) that looks like this:
+
+### CLI Examples:
+```ps1
+python nifty.py "path/to/file.ext" -to recipient@example.com --provider AWS --template mailer.html
+```
+OR
+```ps1
+python nifty.py "path/to/file.ext" -to recipient@example.com --provider Google
+```
 
 
-*./settings.py*
+### Set Up
+
+- Clone this repository
+- Include the necessary *`./settings.py`*
+- If you're using Google Cloud Storage remember to include your own *`./google.json`* file
+- Using your own credentials, create a `settings.py` file (in the same directory as `nifty.py`) that looks like this the settings example below.
+
+
+#### *`./settings.py`* Example:
+
 ```python
 
 class AwsConfig:
@@ -65,7 +91,7 @@ For Gmail, since 'less secure apps' was deprecated some time ago, you need to ge
 - https://support.google.com/accounts/answer/185833?hl=en
 
 
-***
+---
 ## Email Templates
 
 You can create your own custom templates, they're just Jinja2 formatted HTML, very similar to Django, however you'll need to use inline CSS, *it's a mail thing*.
@@ -75,10 +101,13 @@ Here's what the default template `mailer.html` will output:
 ![Alt text](docs/mailer_example.png)
 
 
+---
 ## Cloud Providers
 AWS S3 is available as a Cloud Storage provider which also supports Wasabi (ensure you use the wasabi endpoint url).
 Google Cloud Storage is also available, you'll need to need to create your service-account.json in the Google Cloud Console and then add the path to GoogleConfig.GGL_CREDENTIALS_PATH.
 
+
+---
 ## To Do:
 
 - [X] Improve coverage of logging and Exception handling
