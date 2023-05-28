@@ -2,6 +2,8 @@
 
 class AwsConfig:
 
+    DEFAULT_ROOT_FOLDER = 'testfolder'
+
     AWS_ACCESS_KEY = ""
     AWS_SECRET_ACCESS_KEY = ""
     AWS_BUCKET_NAME = ""
@@ -16,6 +18,8 @@ class AwsConfig:
 
 
 class GoogleConfig:
+
+    DEFAULT_ROOT_FOLDER = 'testfolder'
 
     GGL_BUCKET_NAME = 'nifty-storage'
     GGL_CREDENTIALS_PATH = 'google.json'
