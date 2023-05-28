@@ -1,6 +1,6 @@
 # Nifty Share
 
-You can use Nifty Share to send small or large files with your own cloud provider from the command-line.
+You can use Nifty Share to send small or large files/folders with your own cloud provider from the command-line.
 
 
 ## Usage
@@ -11,7 +11,7 @@ usage: nifty.py [-h] [-p PROVIDER] [-t TEMPLATE] file_path recipient
 Share a link to a file via email.
 
 positional arguments:
-  file_path             path/to/your/file
+  file_path             path/to/your/file-or-folder
   recipient             Email address of the recipient
 
 options:
@@ -27,9 +27,9 @@ options:
 ```ps1
 python nifty.py "path/to/file.ext" recipient@example.com --provider AWS --template mailer.html
 ```
-OR
+
 ```ps1
-python nifty.py "path/to/file.ext" recipient@example.com --provider Google
+python nifty.py "path/to/folder" recipient@example.com --provider Google
 ```
 
 
@@ -114,6 +114,6 @@ Google Cloud Storage is also available, you'll need to need to create your servi
 - [X] Add Google Cloud Storage
     - [ ] Adapt for Threaded Multipart Uploads for GCS
 - [ ] Add Azure
-- [ ] Add ability to select multiple files/folder and zip them before sending
+- [X] Add ability to select a folder containing many files and zip it before sending
 - [ ] Add Database options for tracking your sends and expiry dates
     - [ ] Add ability to re-share expired links from stored data
