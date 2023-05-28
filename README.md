@@ -79,6 +79,24 @@ class MailerConfig:
     MAIL_HOST_SENDER_NAME = "The name you want to show on the email"
     MAIL_HOST_SENDER_ADDRESS = "youremail@example.com"
 
+class DatabaseConfig:
+
+    DB_TYPE = "sqlite"
+    SQLITE_DB_FILENAME = "nifty.db"
+
+    SQLITE_COLS = "id INTEGER PRIMARY KEY AUTOINCREMENT, " \
+                "sender_name VARCHAR(100), " \
+                "file_basename VARCHAR(100), " \
+                "sender_address VARCHAR(100), " \
+                "download_link TEXT, " \
+                "recipient_email VARCHAR(100), " \
+                "expiry_date DATETIME, " \
+                "file_size_mb REAL, " \
+                "files_list TEXT, " \
+                "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"
+
+    # MySQL Config Example in settings_example.py
+
 ```
 
 ## Settings Notes:
@@ -115,5 +133,5 @@ Google Cloud Storage is also available, you'll need to need to create your servi
     - [ ] Adapt for Threaded Multipart Uploads for GCS
 - [ ] Add Azure
 - [X] Add ability to select a folder containing many files and zip it before sending
-- [ ] Add Database options for tracking your sends and expiry dates
+- [X] Add Database options for tracking your sends and expiry dates
     - [ ] Add ability to re-share expired links from stored data

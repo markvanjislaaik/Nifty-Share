@@ -2,3 +2,4 @@ boto3
 Jinja2
 requests
 google-cloud-storage
+mysql-connector-python

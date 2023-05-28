@@ -50,3 +50,36 @@ class MailerConfig:
     MAIL_SMTP_PORT = 587
     MAIL_HOST_SENDER_NAME = "The mame you want to show on the email"
     MAIL_HOST_SENDER_ADDRESS = "youremail@example.com"
+
+class DatabaseConfig:
+
+    DB_TYPE = "sqlite"
+    SQLITE_DB_FILENAME = "nifty.db"
+
+    SQLITE_COLS = "id INTEGER PRIMARY KEY AUTOINCREMENT, " \
+                "sender_name VARCHAR(100), " \
+                "file_basename VARCHAR(100), " \
+                "sender_address VARCHAR(100), " \
+                "download_link TEXT, " \
+                "recipient_email VARCHAR(100), " \
+                "expiry_date DATETIME, " \
+                "file_size_mb REAL, " \
+                "files_list TEXT, " \
+                "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"
+
+    # DB_TYPE = "mysql"
+    # MYSQL_DB_HOST = "127.0.0.1"
+    # MYSQL_DB_PORT = 3306
+    # MYSQL_DB_USERNAME = "your_username"
+    # MYSQL_DB_PASSWORD = "your_password"
+    # MYSQL_DB_NAME = "nifty"
+    # MYSQL_COLS = "id INT PRIMARY KEY AUTO_INCREMENT, " \
+    #             "sender_name VARCHAR(100), " \
+    #             "file_basename VARCHAR(100), " \
+    #             "sender_address VARCHAR(100), " \
+    #             "download_link TEXT, " \
+    #             "recipient_email VARCHAR(100), " \
+    #             "expiry_date DATETIME, " \
+    #             "file_size_mb FLOAT, " \
+    #             "files_list TEXT, " \
+    #             "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"

@@ -4,8 +4,9 @@ from cloud.file_upload import FileUploaderClass
 from zipper.file_zipper import FileZipper
 from mailer.email_formatter import EmailTemplateRenderer
 from mailer.email_sender import EmailSender
+from database.database import DatabaseFactory
 
-from settings import MailerConfig
+from settings import MailerConfig, DatabaseConfig
 
 import logging
 import sys
@@ -23,6 +24,41 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
+
+
+def get_db_connection():
+    
+    db_config = DatabaseConfig()
+
+    if db_config.DB_TYPE == "mysql":
+        mysql_db = DatabaseFactory.create_database(
+            db_type="mysql",
+            host=db_config.MYSQL_DB_HOST,
+            user=db_config.MYSQL_DB_USERNAME,
+            password=db_config.MYSQL_DB_PASSWORD,
+            database=db_config.MYSQL_DB_NAME)
+
+        with mysql_db as db:
+            db.create_table("transfers", db_config.MYSQL_COLS)
+
+        return mysql_db
+
+    elif db_config.DB_TYPE == "sqlite":
+        db_file=db_config.SQLITE_DB_FILENAME
+        if not os.path.exists(db_file):
+
+            sqlite_db = DatabaseFactory.create_database(
+                db_type="sqlite",
+                db_file=db_config.SQLITE_DB_FILENAME)
+
+            with sqlite_db as db:
+                db.create_table("transfers", db_config.SQLITE_COLS)
+
+        else:
+            sqlite_db = DatabaseFactory.create_database(
+                db_type="sqlite",
+                db_file=db_config.SQLITE_DB_FILENAME)
+        return sqlite_db
 
 
 if __name__ == '__main__':
@@ -52,8 +88,8 @@ if __name__ == '__main__':
     link = uploader.get_shareable_link(f"{uploader.root_folder}/{os.path.basename(prepped_file_path)}")
     logger.debug(f"Shareable link: {link}")
 
-    expiry_date = datetime.now() + timedelta(days=7)
-    expiry_date = expiry_date.strftime("%A, %B %d, %Y")
+    expiry_date_dt = datetime.now() + timedelta(days=7)
+    expiry_date = expiry_date_dt.strftime("%A, %B %d, %Y")
 
     # Email formatting
     file_count = len(files_list)
@@ -84,6 +120,26 @@ if __name__ == '__main__':
     logger.info(f"Sending email to {args.recipient}")
     email_sender = EmailSender()
     email_sender.send_email(args.recipient, 'File Shared With You', email_content)
+
+    # Database Insert
+    logger.info(f"Logging to database")
+        
+    connection = get_db_connection()
+    
+    with connection as db:
+        db.insert_data(
+            "transfers",
+            {
+                "sender_name": MailerConfig.MAIL_HOST_SENDER_NAME,
+                "file_basename": os.path.basename(prepped_file_path),
+                "sender_address": MailerConfig.MAIL_HOST_SENDER_ADDRESS,
+                "download_link": link,
+                "recipient_email": args.recipient,
+                "expiry_date": expiry_date_dt,
+                "file_size_mb": round(os.path.getsize(prepped_file_path) / 1024 / 1024, 2),
+                "files_list": ", ".join(files_list)
+            }
+        )
 
     # Clean up
     if prepped_file_path.endswith('.zip'):
