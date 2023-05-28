@@ -25,11 +25,11 @@ options:
 
 ### CLI Examples:
 ```ps1
-python nifty.py "path/to/file.ext" -to recipient@example.com --provider AWS --template mailer.html
+python nifty.py "path/to/file.ext" recipient@example.com --provider AWS --template mailer.html
 ```
 OR
 ```ps1
-python nifty.py "path/to/file.ext" -to recipient@example.com --provider Google
+python nifty.py "path/to/file.ext" recipient@example.com --provider Google
 ```
 
 
