@@ -1,10 +1,9 @@
 venv/
 __pycache__/
+*.vscode/
 
 settings.py
-
-rendered_email.html
-
 google.json
 
+rendered_email.html
 *.zip
