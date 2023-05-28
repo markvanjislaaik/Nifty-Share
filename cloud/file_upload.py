@@ -34,6 +34,7 @@ class ProgressPercentage(object):
 
 
 class FileUploaderClass:
+
     def create_file_uploader(self, provider: str) -> None:
         if provider == "AWS":
             return S3FileUploader()
@@ -46,6 +47,7 @@ class FileUploaderClass:
 
 
 class FileUploader:
+
     def upload_file(self, file_path: str):
         pass
 
@@ -58,6 +60,7 @@ class S3FileUploader(FileUploader):
         self.bucket_name = AwsConfig.AWS_BUCKET_NAME
         self.region = AwsConfig.AWS_DEFAULT_REGION
         self.endpoint_url = AwsConfig.AWS_ENDPOINT_URL
+        self.root_folder = AwsConfig.DEFAULT_ROOT_FOLDER
 
     def upload_file(self, file_path: str, key_path: str, region: str=None) -> int:
 
@@ -121,12 +124,16 @@ class S3FileUploader(FileUploader):
         return result
 
 class GoogleCloudFileUploader(FileUploader):
+
     def __init__(self):
         self.bucket_name = GoogleConfig.GGL_BUCKET_NAME
         self.credentials_path = GoogleConfig.GGL_CREDENTIALS_PATH
+        self.root_folder = GoogleConfig.DEFAULT_ROOT_FOLDER
 
     def upload_file(self, file_path: str, key_path: str) -> int:
+
         logger.info(f"Uploading {file_path} to Google Cloud Storage")
+        
         try:
             storage_client = storage.Client.from_service_account_json(self.credentials_path)
             bucket = storage_client.get_bucket(self.bucket_name)
@@ -160,6 +167,7 @@ class GoogleCloudFileUploader(FileUploader):
 
 
 class AzureFileUploader(FileUploader):
+
     def upload_file(self, file_path: str) -> int:
         # Upload file to Azure
         pass

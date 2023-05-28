@@ -37,8 +37,9 @@ if __name__ == '__main__':
     # File upload and get shareable link
     uploader_factory = FileUploaderClass()
     uploader = uploader_factory.create_file_uploader(args.provider)
-    uploader.upload_file(args.file_path, f"testfolder/{os.path.basename(args.file_path)}")
-    link = uploader.get_shareable_link(f"testfolder/{os.path.basename(args.file_path)}")
+    logger.debug(f"Target Storage Subfolder: {uploader.root_folder}")
+    uploader.upload_file(args.file_path, f"{uploader.root_folder}/{os.path.basename(args.file_path)}")
+    link = uploader.get_shareable_link(f"{uploader.root_folder}/{os.path.basename(args.file_path)}")
     logger.debug(f"Shareable link: {link}")
 
     expiry_date = datetime.now() + timedelta(days=7)
