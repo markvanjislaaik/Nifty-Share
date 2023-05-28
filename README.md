@@ -13,7 +13,7 @@ OR
 python nifty.py "path/to/file" -to recipient@example.com --provider Google
 ```
 
-Just create a `settings.py` file (in the same directory as `nifty.py`) that looks like this and use your own credentials:
+Using your own credentials, create a `settings.py` file (in the same directory as `nifty.py`) that looks like this:
 
 
 *./settings.py*
@@ -21,20 +21,24 @@ Just create a `settings.py` file (in the same directory as `nifty.py`) that look
 
 class AwsConfig:
 
-    AWS_ACCESS_KEY = ""
-    AWS_SECRET_ACCESS_KEY = ""
-    AWS_BUCKET_NAME = ""
-    AWS_DEFAULT_REGION = ""
+    DEFAULT_ROOT_FOLDER = 'target/folder/inside/your/bucket'
+
+    AWS_ACCESS_KEY = "your-access-key"
+    AWS_SECRET_ACCESS_KEY = "your-secret-access-key"
+    AWS_BUCKET_NAME = "your-bucket-name"
+    AWS_DEFAULT_REGION = "af-south-1"
 
     # for AWS in South Africa region "af-south-1" I've found it's important to provide
     # an endpoint url for any other region, you can comment out the endpoint url
     AWS_ENDPOINT_URL = "https://s3.af-south-1.amazonaws.com"
 
-    # for Wasabi (AWS Backed) you NEED to provide an endpoint url
-    # AWS_ENDPOINT_URL = "https://s3.us-east-1.wasabisys.com"
+    # Wasabi Example:
+    AWS_ENDPOINT_URL = "https://s3.us-east-1.wasabisys.com"
 
 
 class GoogleConfig:
+
+    DEFAULT_ROOT_FOLDER = 'target/folder/inside/your/bucket'
 
     GGL_BUCKET_NAME = 'nifty-storage'
     GGL_CREDENTIALS_PATH = 'google.json'
@@ -42,28 +46,33 @@ class GoogleConfig:
 
 class MailerConfig:
 
-    # You can use either AWS SES or Gmail to send emails, just insert the details below,
-    # the required variables are the same for either service but for AWS, 
-    # the MAIL_HOST_USERNAME must be your ACCESS_KEY and the MAIL_PASSWORD must be your SECRET_ACCESS_KEY
-
-    # FOR GMAIL, since 'less secure apps' was deprecated, you need to use an App Password:
-    # Make sure 2-Step Authentication is enabled on your account,
-    # then generate a 16-char App Password for the app you're using to send email.
-    # https://support.google.com/accounts/answer/185833?hl=en
-
     MAIL_HOST_USERNAME = "aws_access_key OR youremail@example.com"
     MAIL_PASSWORD = "aws_secret_access_key OR your16charAppPassword"
-    MAIL_SMTP_SERVER = "smtp.gmail.com OR email-smtp.eu-west-1.amazonaws.com"
+    MAIL_SMTP_SERVER = "email-smtp.eu-west-1.amazonaws.com OR smtp.gmail.com"
     MAIL_SMTP_PORT = 587
-    MAIL_HOST_SENDER_NAME = "The mame you want to show on the email"
+    MAIL_HOST_SENDER_NAME = "The name you want to show on the email"
     MAIL_HOST_SENDER_ADDRESS = "youremail@example.com"
 
 ```
 
+## Settings Notes:
+You can use either AWS SES or your own Gmail account to send emails. The required settings variables are the same for either service but for AWS, the MAIL_HOST_USERNAME must be your ACCESS_KEY and the MAIL_PASSWORD must be your SECRET_ACCESS_KEY.
+
+For Gmail, since 'less secure apps' was deprecated some time ago, you need to generate and use an App Password:
+
+- Make sure 2-Step Authentication is enabled on your google account,
+- Generate a 16-char App Password for the app you're using to send email.
+- https://support.google.com/accounts/answer/185833?hl=en
+
+
 ***
 ## Email Templates
 
-You can create your own custom templates, they're just Jinja2 formatted HTML, very similar to Django, however you'll need to use inline css as most email clients don't seem to allow CSS.
+You can create your own custom templates, they're just Jinja2 formatted HTML, very similar to Django, however you'll need to use inline CSS, *it's a mail thing*.
+
+Here's what the default template `mailer.html` will output:
+
+![Alt text](docs/mailer_example.png)
 
 
 ## Cloud Providers
@@ -78,4 +87,4 @@ Google Cloud Storage is also available, you'll need to need to create your servi
 - [ ] Add Azure
 - [ ] Add ability to select multiple files/folder and zip them before sending
 - [ ] Add Database options for tracking your sends and expiry dates
-    - [ ] Add ability to re-share expired links
+    - [ ] Add ability to re-share expired links from stored data
