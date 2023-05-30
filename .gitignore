@@ -6,4 +6,7 @@ settings.py
 google.json
 
 rendered_email.html
+
 *.zip
+
+*.db

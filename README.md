@@ -91,7 +91,7 @@ class DatabaseConfig:
                 "download_link TEXT, " \
                 "recipient_email VARCHAR(100), " \
                 "expiry_date DATETIME, " \
-                "file_size_mb REAL, " \
+                "file_size_bytes INT, " \
                 "files_list TEXT, " \
                 "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"
 
@@ -100,7 +100,7 @@ class DatabaseConfig:
 ```
 
 ## Settings Notes:
-You can use either AWS SES or your own Gmail account to send emails. The required settings variables are the same for either service but for AWS, the MAIL_HOST_USERNAME must be your ACCESS_KEY and the MAIL_PASSWORD must be your SECRET_ACCESS_KEY.
+You can use your own Gmail account or Amazon Simple Email Service (SES) to send emails. The required settings variables are the same for either service but for AWS, the MAIL_HOST_USERNAME must be your ACCESS_KEY and the MAIL_PASSWORD must be your SECRET_ACCESS_KEY.
 
 For Gmail, since 'less secure apps' was deprecated some time ago, you need to generate and use an App Password:
 
@@ -122,6 +122,7 @@ Here's what the default template `mailer.html` will output:
 ---
 ## Cloud Providers
 AWS S3 is available as a Cloud Storage provider which also supports Wasabi (ensure you use the wasabi endpoint url).
+
 Google Cloud Storage is also available, you'll need to need to create your service-account.json in the Google Cloud Console and then add the path to GoogleConfig.GGL_CREDENTIALS_PATH.
 
 
@@ -135,3 +136,4 @@ Google Cloud Storage is also available, you'll need to need to create your servi
 - [X] Add ability to select a folder containing many files and zip it before sending
 - [X] Add Database options for tracking your sends and expiry dates
     - [ ] Add ability to re-share expired links from stored data
+- [X] Refactor Database Code
