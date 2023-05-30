@@ -63,7 +63,7 @@ class DatabaseConfig:
                 "download_link TEXT, " \
                 "recipient_email VARCHAR(100), " \
                 "expiry_date DATETIME, " \
-                "file_size_mb REAL, " \
+                "file_size_bytes INT, " \
                 "files_list TEXT, " \
                 "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"
 
@@ -80,6 +80,6 @@ class DatabaseConfig:
     #             "download_link TEXT, " \
     #             "recipient_email VARCHAR(100), " \
     #             "expiry_date DATETIME, " \
-    #             "file_size_mb FLOAT, " \
+    #             "file_size_bytes INT, " \
     #             "files_list TEXT, " \
     #             "date_added DATETIME DEFAULT CURRENT_TIMESTAMP"
