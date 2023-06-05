@@ -6,7 +6,7 @@ from settings import DatabaseConfig
 
 class DatabaseFactory:
     @staticmethod
-    def create_database(db_type, **kwargs):
+    def create_database(db_type: str, **kwargs):
         if db_type == "mysql":
             return MySQLDatabase(**kwargs)
         elif db_type == "sqlite":
@@ -16,7 +16,7 @@ class DatabaseFactory:
 
 
 class Database:
-    def create_table(self, table_name, column_definitions):
+    def create_table(self, table_name: str, column_definitions: str) -> None:
         cursor = self.connection.cursor()
 
         create_table_query = f"CREATE TABLE IF NOT EXISTS {table_name} ({column_definitions})"
@@ -24,7 +24,7 @@ class Database:
 
         cursor.close()
 
-    def insert_data(self, table_name, params):
+    def insert_data(self, table_name: str, params: dict) -> None:
 
         params['table_name'] = table_name
         params['files_list'] = ", ".join(params['files_list'])
@@ -34,7 +34,7 @@ class Database:
 
         cursor.close()
 
-    def select_data(self, table_name, condition=None, columns="*"):
+    def select_data(self, table_name: str, condition: str=None, columns: str="*") -> list:
         cursor = self.connection.cursor()
 
         select_query = f"SELECT {columns} FROM {table_name}"
@@ -49,7 +49,7 @@ class Database:
         return results
 
 class SQLiteDatabase(Database):
-    def __init__(self, db_file):
+    def __init__(self, db_file: str) -> None:
         self.db_file = DatabaseConfig.SQLITE_DB_FILENAME
         self.connection = None
 
@@ -80,18 +80,18 @@ class SQLiteDatabase(Database):
         );
         """
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.connection = sqlite3.connect(self.db_file)
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         if self.connection:
             self.connection.commit()
             self.connection.close()
     
 
 class MySQLDatabase(Database):
-    def __init__(self, host, user, password, database):
+    def __init__(self, host: str, user: str, password: str, database: str) -> None:
         self.host = host
         self.user = user
         self.password = password
@@ -122,7 +122,7 @@ class MySQLDatabase(Database):
             );
             """
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.connection = mysql.connector.connect(
             host=self.host,
             user=self.user,
@@ -131,7 +131,7 @@ class MySQLDatabase(Database):
         )
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         if self.connection:
             self.connection.commit()
             self.connection.close()
