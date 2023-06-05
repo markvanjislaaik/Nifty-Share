@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class EmailSender:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.host_access_key = MailerConfig.MAIL_HOST_USERNAME
         self.sender_email = MailerConfig.MAIL_HOST_SENDER_ADDRESS
         self.sender_password = MailerConfig.MAIL_PASSWORD

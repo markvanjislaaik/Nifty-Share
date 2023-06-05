@@ -12,7 +12,7 @@ from settings import AwsConfig, GoogleConfig
 logger = logging.getLogger(__name__)
 
 
-class ProgressPercentage(object):
+class ProgressPercentage:
 
     def __init__(self, filename: str) -> None:
         
@@ -26,10 +26,7 @@ class ProgressPercentage(object):
         with self._lock:
             self._uploaded += bytes_amount
             percentage = (self._uploaded / self._size) * 100
-            sys.stdout.write(
-                "\r%s  %s / %s  (%.2f%%)" % (
-                    self._filename, self._uploaded, self._size,
-                    percentage))
+            sys.stdout.write("\r%s  %s / %s  (%.2f%%)" % (self._filename, self._uploaded, self._size, percentage))
             sys.stdout.flush()
 
 
@@ -46,13 +43,7 @@ class FileUploaderClass:
             raise ValueError("Invalid provider")
 
 
-class FileUploader:
-
-    def upload_file(self, file_path: str):
-        pass
-
-
-class S3FileUploader(FileUploader):
+class S3FileUploader:
 
     def __init__(self):
         self.access_key = AwsConfig.AWS_ACCESS_KEY
@@ -110,7 +101,6 @@ class S3FileUploader(FileUploader):
         except Exception as e:
             logger.critical(f"s3 Connection Error: {e}")
 
-
         result = s3_client.generate_presigned_url(
             'get_object',
             Params={
@@ -123,7 +113,8 @@ class S3FileUploader(FileUploader):
 
         return result
 
-class GoogleCloudFileUploader(FileUploader):
+
+class GoogleCloudFileUploader:
 
     def __init__(self):
         self.bucket_name = GoogleConfig.GGL_BUCKET_NAME
@@ -144,7 +135,7 @@ class GoogleCloudFileUploader(FileUploader):
             logger.critical(f"Upload Error: {e}")
             return 500
 
-    def get_shareable_link(self, key_path: str) -> str:
+    def get_shareable_link(self, key_path: str) -> str | None:
 
         logger.info(f"Retrieving Google Storage Shareable Link")
         
@@ -166,7 +157,7 @@ class GoogleCloudFileUploader(FileUploader):
             return None
 
 
-class AzureFileUploader(FileUploader):
+class AzureFileUploader:
 
     def upload_file(self, file_path: str) -> int:
         # Upload file to Azure
