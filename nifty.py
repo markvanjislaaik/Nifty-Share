@@ -5,8 +5,8 @@ from cloud.file_upload import FileUploaderClass
 from zipper.file_zipper import FileZipper
 from mailer.email_formatter import EmailTemplateRenderer
 from mailer.email_sender import EmailSender
-from settings import MailerConfig, DatabaseConfig
-from database.database import DatabaseFactory, get_db_connection
+from settings import MailerConfig
+from database.database import get_db_connection
 
 import logging
 import sys
