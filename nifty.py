@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from cloud.file_upload import FileUploaderClass
+from integrations.file_upload import FileUploaderClass
 from zipper.file_zipper import FileZipper
 from mailer.email_formatter import EmailTemplateRenderer
 from mailer.email_sender import EmailSender

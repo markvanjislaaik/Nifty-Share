@@ -57,6 +57,9 @@ class S3FileUploader:
 
         logger.info(f"Uploading {file_path} to AWS S3 Storage")
 
+        if not os.access(file_path, os.F_OK):
+            raise FileNotFoundError(f"File {file_path} not found")
+
         if not region:
             region = self.region
 
@@ -124,16 +127,27 @@ class GoogleCloudFileUploader:
     def upload_file(self, file_path: str, key_path: str) -> int:
 
         logger.info(f"Uploading {file_path} to Google Cloud Storage")
-        
+
+        if not os.access(file_path, os.F_OK):
+            raise FileNotFoundError(f"File {file_path} not found")
+
         try:
             storage_client = storage.Client.from_service_account_json(self.credentials_path)
             bucket = storage_client.get_bucket(self.bucket_name)
             blob = bucket.blob(key_path)
-            blob.upload_from_filename(file_path, predefined_acl="publicRead")
+            try:
+                blob.upload_from_filename(file_path, predefined_acl="publicRead")
+            except FileNotFoundError as e:
+                logger.critical(f"File Not Found: {e}")
+                return 500
+            except Exception as e:
+                logger.critical(f"Upload Error: {e}")
+                return 500
             return 200
         except Exception as e:
             logger.critical(f"Upload Error: {e}")
             return 500
+            
 
     def get_shareable_link(self, key_path: str) -> str | None:
 
@@ -166,30 +180,3 @@ class AzureFileUploader:
     def get_shareable_link(self, key_path: str) -> str:
         # Get shareable link from Azure
         pass
-
-
-if __name__ == '__main__':
-
-    # # We can test file upload by running this file directly
-    # provider = "AWS"
-    # file_path = "upload_tests/testfile.txt"
-    # file_basename = os.path.basename(file_path)
-
-    # f = FileUploaderClass()
-    # uploader = f.create_file_uploader(provider)
-    # uploader.upload_file(file_path, f"testfolder/{file_basename}")
-
-    # link = uploader.get_shareable_link(f"testfolder/{file_basename}")
-    # print(link)
-
-    # We can test file upload by running this file directly
-    provider = "Google"
-    file_path = "upload_tests/testfile6.txt"
-    file_basename = os.path.basename(file_path)
-
-    f = FileUploaderClass()
-    uploader = f.create_file_uploader(provider)
-    uploader.upload_file(file_path, f"testfolder/{file_basename}")
-
-    link = uploader.get_shareable_link(f"testfolder/{file_basename}")
-    print(link)
