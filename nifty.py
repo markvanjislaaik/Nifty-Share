@@ -26,28 +26,21 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser(description='Share a link to a file via email.')
-    parser.add_argument('file_path', type=str, help='path/to/your/file')
-    parser.add_argument('recipient', type=str, help='Email address of the recipient')
-    parser.add_argument('-p', '--provider', type=str, default='AWS', help='Cloud provider (default: AWS)')
-    parser.add_argument('-t', '--template', type=str, default='mailer.html', help='Email template filename (default: mailer.html)')
-    args = parser.parse_args()
+def nifty_transfer(file_path, recipient, provider='Google', template='mailer.html') -> int:
 
     # use Zipper if file_path is a directory
-    if os.path.isdir(args.file_path):
-        logger.info(f"Zipping {args.file_path}")
+    if os.path.isdir(file_path):
+        logger.info(f"Zipping {file_path}")
         zipper = FileZipper()
-        files_list = zipper.list_files(args.file_path)
-        prepped_file_path = zipper.create_zip(args.file_path, f"{os.path.basename(args.file_path)}.zip")
+        files_list = zipper.list_files(file_path)
+        prepped_file_path = zipper.create_zip(file_path, f"{os.path.basename(file_path)}.zip")
     else:
-        files_list = [args.file_path]
-        prepped_file_path = args.file_path
+        files_list = [file_path]
+        prepped_file_path = file_path
 
     # File upload and get shareable link
     uploader_factory = FileUploaderClass()
-    uploader = uploader_factory.create_file_uploader(args.provider)
+    uploader = uploader_factory.create_file_uploader(provider)
     logger.debug(f"Target Storage Subfolder: {uploader.root_folder}")
     uploader.upload_file(prepped_file_path, f"{uploader.root_folder}/{os.path.basename(prepped_file_path)}")
     link = uploader.get_shareable_link(f"{uploader.root_folder}/{os.path.basename(prepped_file_path)}")
@@ -69,7 +62,7 @@ if __name__ == '__main__':
         "file_basename": os.path.basename(prepped_file_path),
         "sender_address": MailerConfig.MAIL_HOST_SENDER_ADDRESS,
         "download_link": link,
-        "recipient_email": args.recipient,
+        "recipient_email": recipient,
         "expiry_date_dt": expiry_date_dt,
         "expiry_date": expiry_date,
         "file_size_bytes": os.path.getsize(prepped_file_path),
@@ -80,14 +73,14 @@ if __name__ == '__main__':
         "local_datetime": str(datetime.now())[:19]
     }
 
-    logger.info(f"Rendering email template {args.template}")
+    logger.info(f"Rendering email template {template}")
     template_renderer = EmailTemplateRenderer(template_dir='mail_templates')
-    email_content = template_renderer.render_template(args.template, **data_params)
+    email_content = template_renderer.render_template(template, **data_params)
 
     # Email send
-    logger.info(f"Sending email to {args.recipient}")
+    logger.info(f"Sending email to {recipient}")
     email_sender = EmailSender()
-    email_sender.send_email(args.recipient, 'File Shared With You', email_content)
+    email_sender.send_email(recipient, 'File Shared With You', email_content)
 
     # Database Insert
     logger.info(f"Logging to database")
@@ -99,3 +92,23 @@ if __name__ == '__main__':
     if prepped_file_path.endswith('.zip'):
         logger.info(f"Removing {prepped_file_path}")
         zipper.remove(prepped_file_path)
+
+    return 0
+
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Share a link to a file via email.')
+    parser.add_argument('file_path', type=str, help='path/to/your/file')
+    parser.add_argument('recipient', type=str, help='Email address of the recipient')
+    parser.add_argument('-p', '--provider', type=str, default='Google', help='Cloud provider (default: Google)')
+    parser.add_argument('-t', '--template', type=str, default='mailer.html', help='Email template filename (default: mailer.html)')
+    args = parser.parse_args()
+
+    args_dict = vars(args)
+
+    nifty_transfer(**args_dict)
+
+    # OR for non-cli use:
+
+    # nifty_transfer(**{'file_path': 'C:/Users/markv/Desktop/zipp_tests', 'recipient': 'markvanjislaaik@gmail.com', 'provider': 'Google', 'template': 'mailer.html'})
