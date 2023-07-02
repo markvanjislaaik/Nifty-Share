@@ -129,11 +129,11 @@ Google Cloud Storage is also available, you'll need to need to create your servi
 ---
 ## To Do:
 
-- [X] Improve coverage of logging and Exception handling
-- [X] Add Google Cloud Storage
-    - [ ] Adapt for Threaded Multipart Uploads for GCS
-- [ ] Add Azure
-- [X] Add ability to select a folder containing many files and zip it before sending
-- [X] Add Database options for tracking your sends and expiry dates
-    - [ ] Add ability to re-share expired links from stored data
-- [X] Refactor Database Code
+- [X] Add Google Cloud Storage.
+    - [ ] Adapt for Threaded Multipart Uploads for GCS.
+- [ ] Add Azure.
+- [X] Add Database options for tracking your sends and expiry dates.
+    - [ ] Add ability to re-share expired links from stored data.
+- [ ] Create a pip installable package.
+- [ ] Refactor `core.py` away from Singleton structure.
+- [ ] Improve mail template context readability to increase contribution accessibility.

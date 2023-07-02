@@ -21,13 +21,3 @@ class FileZipper:
                     rel_path = os.path.relpath(file_path, path)
                     zip_file.write(file_path, os.path.join(base_dir, rel_path))
         return zip_path
-
-    def remove(self, zip_path: str) -> None:
-        os.remove(zip_path)
-
-if __name__ == '__main__':
-    
-    zipper = FileZipper()
-    input_path = "C:/Users/user1/Desktop/HolidayPhotos"
-    result = zipper.create_zip(input_path, f"{os.path.basename(input_path)}.zip")
-    print(result)
