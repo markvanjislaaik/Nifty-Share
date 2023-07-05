@@ -135,5 +135,4 @@ Google Cloud Storage is also available, you'll need to need to create your servi
 - [X] Add Database options for tracking your sends and expiry dates.
     - [ ] Add ability to re-share expired links from stored data.
 - [ ] Create a pip installable package.
-- [ ] Refactor `core.py` away from Singleton structure.
 - [ ] Improve mail template context readability to increase contribution accessibility.
